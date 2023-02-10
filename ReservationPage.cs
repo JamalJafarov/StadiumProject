@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StadiumProject.Models;
+using StadiumProject.Models1;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,15 +20,15 @@ namespace StadiumProject
         }
 
 
-        Stad st = new Stad();
-
+        StadiumDbContext st = new ();
+        public int ReservationId;
 
         private void Reservation_Load(object sender, EventArgs e)
         {
             cmb_stadium.Items.AddRange(st.Stads.Select(x => x.Name).ToArray());
             cmb_Fullname.Items.AddRange(st.Customers.Select(c => c.Name + "|" + c.Surname + "|" + c.PhoneNumber).ToArray());
             cmbRoom.Items.AddRange(st.Rooms.Select(r=>r.RoomNumber).ToArray()); 
-            dtgReservation.DataSource = st.Reservations.ToArray();
+            //dtgReservation.DataSource = st.Reservations.ToArray();
 
 
         }
@@ -40,16 +40,6 @@ namespace StadiumProject
 
 
         }
-
-
-
-        //private void btnCreateCustomer_Click(object sender, EventArgs e)
-        //{
-        //    CustomerCRUD customer = new();
-        //    customer.ShowDialog();
-        //    cmb_Fullname.Items.Clear();
-        //    cmb_Fullname.Items.AddRange(st.Customers.Select(c => c.Name + "|" + c.Surname + "|" + c.PhoneNumber).ToArray());
-        //}
 
         private void lbl_Click(object sender, EventArgs e)
         {
@@ -74,12 +64,7 @@ namespace StadiumProject
 
 
 
-        public void AddStadiumForReservations(int resId, int cusId)
-        {
-            ReservationToStadium restostad = new ReservationToStadium() { ReservationId = resId, StadiumId = cusId };
-            st.ReservationToStadiums.Add(restostad);
-            st.SaveChanges();
-        }
+
 
         public void AddRoomForReservations(int resId)
         {
@@ -113,23 +98,18 @@ namespace StadiumProject
 
         }
 
-        public void AddCustomerForReservations(int resId, int cusId)
-        {
-            ReservationToCustomer restocus = new ReservationToCustomer() { ReservationId = resId, CustomerId = cusId };
-            st.ReservationToCustomers.Add(restocus);
-            st.SaveChanges();
-        }
+
 
         public int GetIdForStadium(string name)
         {
-            Stadium selectedstadium = st.Stads.FirstOrDefault(f => f.Name == name);
+            Stad selectedstadium = st.Stads.FirstOrDefault(f => f.Name == name);
             if (selectedstadium != null)
             {
                 return selectedstadium.Id;
             }
             else
             {
-                Stadium std = new();
+                Stad std = new();
                 st.Stads.Add(std);
                 st.SaveChanges();
 
@@ -186,38 +166,59 @@ namespace StadiumProject
             string name = lblName.Text;
             string surname = lblSurname.Text;
             string phonenumber = lblPhonenumber.Text;
-            DateTime gametime = dtDate.Value;
-            string time = cmbTime.Text;
+            DateTime gameDate = dtDate.Value;
+
             string stadium = cmb_stadium.Text;
             string room = cmbRoom.Text;
             int playerCount=(int)nmPlayersCount.Value;
-            int StadiumId = GetIdForStadium(stadium);
-            int CustomerId = GetIdForCustomer(name);
-            int RoomId=GetIdForRoom(room);
+
 
 
 
             int numberOfRooms =1;
-            if (cmb_Fullname != null && cmbTime!=null && cmbTime!=null && playerCount!=0 )
+            if (cmb_Fullname != null && playerCount!=0 &&cmb_stadium!=null)
             {
 
-                Reservation reserv = new()
+
+                int StadiumId = GetIdForStadium(stadium);
+                int CustomerId = GetIdForCustomer(name);
+                int RoomId = GetIdForRoom(room);
+
+
+
+                Reservation reservationDate = st.Reservations.FirstOrDefault(c => c.GameDate == gameDate);
+                if (reservationDate!=null || gameDate<DateTime.Now)
                 {
-                    GameDate = gametime,
-                    Time = time,
+                    MessageBox.Show("Select valid date.", "Date Time Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
-                };
+                else
+                {
+                    Reservation reserv = new()
+                    {
+                        GameDate = gameDate,
+                        CustomerId=CustomerId,
+                        StadiumId=StadiumId,
+                        
+                    };
 
 
-                st.Reservations.Add(reserv);
-                st.SaveChanges();
-                dtgReservation.DataSource = st.Reservations.ToList();
-                AddStadiumForReservations(reserv.Id, StadiumId);
-                AddCustomerForReservations(reserv.Id, CustomerId);
-                AddRoomForReservations(reserv.Id);
-                Success sc = new Success();
-                sc.ShowDialog();
-                panel2.Visible = false;
+
+                    st.Reservations.Add(reserv);
+                    st.SaveChanges();
+
+                    dtgReservation.Rows.Add(reserv.Id,lblName.Text,cmb_stadium.Text,cmbRoom.Text,lblPrice.Text);
+
+                    //dtgReservation.DataSource = st.Reservations.ToList();
+
+                    AddRoomForReservations(reserv.Id);
+
+                    Success sc = new Success();
+                    sc.ShowDialog();
+                    panel2.Visible = false;
+                }
+
+                
             }
             else
             {
@@ -229,7 +230,14 @@ namespace StadiumProject
         private void btnAddCustomer_Click(object sender, EventArgs e)
         {
             CustomerCRUD cstmr= new CustomerCRUD();
+            cstmr.WindowState = FormWindowState.Normal;
             cstmr.ShowDialog();
+            
+
+            cmb_Fullname.Items.Clear();
+            cmb_Fullname.Items.AddRange(st.Customers.Select(c => c.Name + "|" + c.Surname + "|" + c.PhoneNumber).ToArray());
+            
+
         }
 
         private void cmbRoom_KeyUp(object sender, KeyEventArgs e)
@@ -278,6 +286,123 @@ namespace StadiumProject
             if (nmPlayersCount.Value > 12)
             {
                 nmPlayersCount.Visible = true;
+            }
+        }
+        
+        private void pbExit_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState==FormWindowState.Maximized)
+            {
+                this.Visible = true;
+            }
+            
+            this.Close();
+        }
+
+        private void cmb_stadium_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string stadium = cmb_stadium.Text;
+            int StadiumId = GetIdForStadium(stadium);
+            Stad selectedstadium = st.Stads.FirstOrDefault(c => c.Id == StadiumId);
+            lblPrice.Text = selectedstadium.Price+" AZN".ToString();
+            lblPrice.Visible = true;
+        }
+
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string name = lblName.Text;
+                string surname = lblSurname.Text;
+                string phonenumber = lblPhonenumber.Text;
+                DateTime gameDate = dtDate.Value;
+
+                string stadium = cmb_stadium.Text;
+                string room = cmbRoom.Text;
+                int playerCount = (int)nmPlayersCount.Value;
+
+                Reservation rsrv = st.Reservations.Find(ReservationId);
+
+
+                st.Remove<Reservation>(rsrv);
+                st.SaveChanges();
+                dtgReservation.DataSource = st.Reservations.ToList();
+                Success sc = new Success();
+                sc.ShowDialog();
+
+
+
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void dtgReservation_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                if (dtgReservation.CurrentCell.RowIndex != -1)
+                {
+                    ReservationId = Convert.ToInt32(dtgReservation.Rows[e.RowIndex].Cells[0].Value);
+                    Reservation res = st.Reservations.Find(ReservationId);
+
+
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Incorrect selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
+
+        private void btn_Update_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string name = lblName.Text;
+                string surname = lblSurname.Text;
+                string phonenumber = lblPhonenumber.Text;
+                DateTime gameDate = dtDate.Value;
+
+                string stadium = cmb_stadium.Text;
+                string room = cmbRoom.Text;
+                int playerCount = (int)nmPlayersCount.Value;
+
+
+                if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(surname) && !string.IsNullOrEmpty(phonenumber) 
+                    && gameDate!=null && !string.IsNullOrWhiteSpace(stadium) && !string.IsNullOrWhiteSpace(room) &&playerCount!=0 &&
+                    dtgReservation.CurrentCell.RowIndex != -1)
+                {
+
+
+                    Reservation rsrv = st.Reservations.Find(ReservationId);
+                    rsrv.GameDate = gameDate;
+
+
+                    st.Update<Reservation>(rsrv);
+                    st.SaveChanges();
+                    dtgReservation.DataSource = st.Reservations.ToList();
+                    Success sc = new Success();
+                    sc.ShowDialog();
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Fill the blanks.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -9,7 +9,12 @@ namespace StadiumProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if(this.WindowState== FormWindowState.Maximized)
+            {
+                panelMain.Size = MaximumSize;
+            }
 
+            OpenInside(new ReservationPage());
         }
 
         private void btn_CustomerCRUD_Click(object sender, EventArgs e)
@@ -51,9 +56,7 @@ namespace StadiumProject
 
         private void pbMax_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
-
-            
+            this.WindowState = FormWindowState.Maximized;            
             pbMaximize.Visible = false;
             pbResize.Visible = true;
         }
@@ -82,8 +85,14 @@ namespace StadiumProject
         private void panelMain_Paint(object sender, PaintEventArgs e)
         {
 
+
         }
 
 
+
+        private void Dashboard_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

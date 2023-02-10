@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StadiumProject.Models;
+using StadiumProject.Models1;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +14,7 @@ namespace StadiumProject
 {
     public partial class MonthylReportPage : Form
     {
-        Stad db = new();
+        StadiumDbContext db = new();
         public MonthylReportPage()
         {
             InitializeComponent();
@@ -26,6 +26,11 @@ namespace StadiumProject
 
         }
 
+        private void pbExit_Click(object sender, EventArgs e)
+        {
+
+            this.Close();
+        }
     }
 
     

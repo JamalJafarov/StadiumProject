@@ -44,7 +44,9 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pbExit = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dtgCustomer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbExit)).BeginInit();
             this.SuspendLayout();
             // 
             // txtCustomerName
@@ -205,6 +207,19 @@
             this.textBox1.TabIndex = 4;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
+            // pbExit
+            // 
+            this.pbExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbExit.Image = ((System.Drawing.Image)(resources.GetObject("pbExit.Image")));
+            this.pbExit.Location = new System.Drawing.Point(1627, 16);
+            this.pbExit.Name = "pbExit";
+            this.pbExit.Size = new System.Drawing.Size(48, 44);
+            this.pbExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbExit.TabIndex = 5;
+            this.pbExit.TabStop = false;
+            this.pbExit.Visible = false;
+            this.pbExit.Click += new System.EventHandler(this.pbExit_Click);
+            // 
             // CustomerCRUD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
@@ -212,6 +227,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1699, 1064);
+            this.Controls.Add(this.pbExit);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
@@ -226,11 +242,12 @@
             this.Controls.Add(this.txtCustomerName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CustomerCRUD";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Customer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.CustomerCRUD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtgCustomer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbExit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -250,5 +267,6 @@
         private Button btnUpdate;
         private Button btnDelete;
         private TextBox textBox1;
+        private PictureBox pbExit;
     }
 }

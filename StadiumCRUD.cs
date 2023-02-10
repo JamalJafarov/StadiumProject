@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using StadiumProject.Models;
+using StadiumProject.Models1;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,7 +26,8 @@ namespace StadiumProject
             dtgStadium.DataSource = st.Stads.ToList();
         }
 
-        Stad st = new Stad();
+        StadiumDbContext st=new StadiumDbContext();
+        
 
 
 
@@ -44,7 +45,7 @@ namespace StadiumProject
                 if (dtgStadium.CurrentCell.RowIndex != -1)
                 {
                     StadiumId = Convert.ToInt32(dtgStadium.Rows[e.RowIndex].Cells[0].Value);
-                    Stadium std = st.Stads.Find(StadiumId);
+                    Stad std = st.Stads.Find(StadiumId);
 
                     txtStadiumName.Text = std.Name.ToString();
                     nmPrice.Text = std.Price.ToString();
@@ -74,7 +75,7 @@ namespace StadiumProject
                 {
                     if (!string.IsNullOrWhiteSpace(name) && price != 0)
                     {
-                        Stadium newStadium = new()
+                        Stad newStadium = new()
                         {
                             Name = name,
                             Price = price
@@ -123,13 +124,12 @@ namespace StadiumProject
             {
 
 
-                Stadium stadium = st.Stads.Find(StadiumId);
+                Stad stadium = st.Stads.Find(StadiumId);
                 stadium.Name = name;
                 stadium.Price = price;
 
-                st.Update<Stadium>(stadium);
-                st.SaveChanges();
-                dtgStadium.DataSource = st.Stads.ToList();
+                st.Update<Stad>(stadium);
+                st.SaveChanges(); dtgStadium.DataSource = st.Stads.ToList();
                 Success sc = new Success();
                 sc.ShowDialog();
                 ClearData();
@@ -154,11 +154,12 @@ namespace StadiumProject
                 {
 
 
-                    Stadium stadium = st.Stads.Find(StadiumId);
+                    Stad stadium = st.Stads.Find(StadiumId);
                     stadium.Name = name;
                     stadium.Price = price;
 
-                    st.Remove<Stadium>(stadium);
+                    st.Remove<Stad>(stadium);
+
                     st.SaveChanges();
                     dtgStadium.DataSource = st.Stads.ToList();
                     Success sc = new Success();
@@ -197,6 +198,12 @@ namespace StadiumProject
 
 
 
+        }
+
+        private void pbExit_Click(object sender, EventArgs e)
+        {
+
+            this.Close();
         }
     }
 }

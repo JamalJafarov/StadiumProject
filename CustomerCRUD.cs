@@ -1,4 +1,4 @@
-﻿using StadiumProject.Models;
+﻿using StadiumProject.Models1;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +13,7 @@ namespace StadiumProject
 {
     public partial class CustomerCRUD : Form
     {
-        Stad st=new Stad();
+        StadiumDbContext st=new();
         public int CustomerId;
         public CustomerCRUD()
         {
@@ -22,33 +22,13 @@ namespace StadiumProject
 
         private void CustomerCRUD_Load(object sender, EventArgs e)
         {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                pbExit.Visible = true;
+            }
             dtgCustomer.DataSource = st.Customers.ToList();
         }
-        private void dtgCustomer_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
 
-            try
-            {
-                if (dtgCustomer.CurrentCell.RowIndex != -1)
-                {
-                    CustomerId = Convert.ToInt32(dtgCustomer.Rows[e.RowIndex].Cells[0].Value);
-                    Customer cus = st.Customers.Find(CustomerId);
-
-                    txtCustomerName.Text=cus.Name.ToString();
-                    txtcustomerSurname.Text=cus.Surname.ToString();
-                    txtcustomerPhonenumber.Text=cus.PhoneNumber.ToString(); 
-
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Incorrect selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-            //txtCustomerName.Text = dtgCustomer.Rows[e.RowIndex].Cells[1].Value.ToString();
-            //txtcustomerSurname.Text = dtgCustomer.Rows[e.RowIndex].Cells[2].Value.ToString();
-            //txtcustomerPhonenumber.Text = dtgCustomer.Rows[e.RowIndex].Cells[3].Value.ToString();
-        }
 
         void ClearData()
         {
@@ -96,6 +76,30 @@ namespace StadiumProject
             }
         }
 
+        private void dtgCustomer_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+            try
+            {
+                if (dtgCustomer.CurrentCell.RowIndex != -1)
+                {
+                    CustomerId = Convert.ToInt32(dtgCustomer.Rows[e.RowIndex].Cells[0].Value);
+                    Customer cus = st.Customers.Find(CustomerId);
+
+                    txtCustomerName.Text = cus.Name.ToString();
+                    txtcustomerSurname.Text = cus.Surname.ToString();
+                    txtcustomerPhonenumber.Text = cus.PhoneNumber.ToString();
+
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Incorrect selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
+        }
+
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
@@ -104,28 +108,17 @@ namespace StadiumProject
                 string surname = txtcustomerSurname.Text;
                 string phonenumber = txtcustomerPhonenumber.Text;
 
+                Customer customer = st.Customers.Find(CustomerId);
+                customer.Name = name;
+                customer.Surname = surname;
+                customer.PhoneNumber = phonenumber;
 
-                if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(surname) && !string.IsNullOrEmpty(phonenumber) && dtgCustomer.CurrentCell.RowIndex!=-1)
-                {
-
-
-                    Customer customer = st.Customers.Find(CustomerId);
-                    customer.Name = name;
-                    customer.Surname = surname;
-                    customer.PhoneNumber= phonenumber;
-
-                    st.Update<Customer>(customer);
-                    st.SaveChanges();
-                    dtgCustomer.DataSource = st.Customers.ToList();
-                    Success sc = new Success();
-                    sc.ShowDialog();
-                    ClearData();
-
-                }
-                else
-                {
-                    MessageBox.Show("Fill the blanks.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                st.Update<Customer>(customer);
+                st.SaveChanges();
+                dtgCustomer.DataSource = st.Customers.ToList();
+                Success sc = new Success();
+                sc.ShowDialog();
+                ClearData();
 
             }
             catch (Exception)
@@ -144,28 +137,20 @@ namespace StadiumProject
                 string surname = txtcustomerSurname.Text;
                 string phonenumber = txtcustomerPhonenumber.Text;
 
+                Customer customer = st.Customers.Find(CustomerId);
+                customer.Name = name;
+                customer.Surname = surname;
+                customer.PhoneNumber = phonenumber;
 
-                if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(surname) && !string.IsNullOrEmpty(phonenumber) && dtgCustomer.CurrentCell.RowIndex != -1)
-                {
+                st.Remove<Customer>(customer);
+
+                st.SaveChanges();
+                dtgCustomer.DataSource = st.Customers.ToList();
+                Success sc = new Success();
+                sc.ShowDialog();
+                ClearData();
 
 
-                    Customer customer = st.Customers.Find(CustomerId);
-                    customer.Name = name;
-                    customer.Surname = surname;
-                    customer.PhoneNumber = phonenumber;
-
-                    st.Remove<Customer>(customer);
-                    st.SaveChanges();
-                    dtgCustomer.DataSource = st.Customers.ToList();
-                    Success sc = new Success();
-                    sc.ShowDialog();
-                    ClearData();
-
-                }
-                else
-                {
-                    MessageBox.Show("Fill the blanks.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
 
             }
             catch (Exception)
@@ -186,6 +171,12 @@ namespace StadiumProject
             {
                 dtgCustomer.DataSource = st.Customers.ToList();
             }
+        }
+
+        private void pbExit_Click(object sender, EventArgs e)
+        {
+
+            this.Close();
         }
     }
 }

@@ -4,7 +4,7 @@
 
 namespace StadiumProject.Migrations
 {
-    public partial class nullbable : Migration
+    public partial class @new : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

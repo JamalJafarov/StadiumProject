@@ -70,6 +70,7 @@
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Success";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Success";
             this.Load += new System.EventHandler(this.Success_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

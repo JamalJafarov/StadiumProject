@@ -1,4 +1,4 @@
-﻿using StadiumProject.Models;
+﻿using StadiumProject.Models1;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +16,7 @@ namespace StadiumProject
     public partial class RoomPage : Form
     {
         public int RoomId;
-        Stad st = new();
+        StadiumDbContext st = new();
         public RoomPage()
         {
             InitializeComponent();
@@ -24,7 +24,9 @@ namespace StadiumProject
 
         private void RoomPage_Load(object sender, EventArgs e)
         {
+            
             dtgRoom.DataSource=st.Rooms.ToList();
+
         }
 
         void ClearData()
@@ -137,12 +139,13 @@ namespace StadiumProject
             if (!string.IsNullOrWhiteSpace(name) && capacity != string.Empty && dtgRoom.CurrentCell.RowIndex != -1)
             {
 
-
+                dtgRoom.Columns[3].Visible = false;
                 Room room = st.Rooms.Find(RoomId);
                 room.RoomNumber = name;
                 room.Capacity = capacity;
 
                 st.Remove<Room>(room);
+
                 st.SaveChanges();
                 dtgRoom.DataSource = st.Rooms.ToList();
                 Success sc = new Success();
@@ -168,6 +171,12 @@ namespace StadiumProject
                 dtgRoom.DataSource = st.Rooms.ToList();
             }
 
+        }
+
+        private void pbExit_Click(object sender, EventArgs e)
+        {
+
+            this.Close();
         }
     }
 }

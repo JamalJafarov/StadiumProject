@@ -47,6 +47,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.MenuPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbResize)).BeginInit();
@@ -133,6 +134,7 @@
             this.MenuPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MenuPanel.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.MenuPanel.Controls.Add(this.label1);
             this.MenuPanel.Controls.Add(this.pictureBox1);
             this.MenuPanel.Controls.Add(this.pbResize);
             this.MenuPanel.Controls.Add(this.pbMaximize);
@@ -146,7 +148,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(2096, 15);
+            this.pictureBox1.Location = new System.Drawing.Point(2108, 16);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(48, 44);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -158,7 +160,7 @@
             // 
             this.pbResize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbResize.Image = ((System.Drawing.Image)(resources.GetObject("pbResize.Image")));
-            this.pbResize.Location = new System.Drawing.Point(2150, 15);
+            this.pbResize.Location = new System.Drawing.Point(2162, 16);
             this.pbResize.Name = "pbResize";
             this.pbResize.Size = new System.Drawing.Size(48, 44);
             this.pbResize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -171,7 +173,7 @@
             // 
             this.pbMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbMaximize.Image = ((System.Drawing.Image)(resources.GetObject("pbMaximize.Image")));
-            this.pbMaximize.Location = new System.Drawing.Point(2150, 15);
+            this.pbMaximize.Location = new System.Drawing.Point(2162, 16);
             this.pbMaximize.Name = "pbMaximize";
             this.pbMaximize.Size = new System.Drawing.Size(48, 44);
             this.pbMaximize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -183,7 +185,7 @@
             // 
             this.pbExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbExit.Image = ((System.Drawing.Image)(resources.GetObject("pbExit.Image")));
-            this.pbExit.Location = new System.Drawing.Point(2204, 15);
+            this.pbExit.Location = new System.Drawing.Point(2216, 16);
             this.pbExit.Name = "pbExit";
             this.pbExit.Size = new System.Drawing.Size(48, 44);
             this.pbExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -221,6 +223,7 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 7;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.Dashboard_Click);
             // 
             // panel6
             // 
@@ -273,6 +276,18 @@
             this.panelMain.TabIndex = 7;
             this.panelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMain_Paint);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
+            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label1.Location = new System.Drawing.Point(3, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(475, 45);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "       Stadium Reservation Centre";
+            // 
             // WelcomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
@@ -287,6 +302,7 @@
             this.Text = "WelcomeForm";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MenuPanel.ResumeLayout(false);
+            this.MenuPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbResize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMaximize)).EndInit();
@@ -317,5 +333,6 @@
         private PictureBox pbResize;
         private PictureBox pictureBox2;
         private Panel panelMain;
+        private Label label1;
     }
 }

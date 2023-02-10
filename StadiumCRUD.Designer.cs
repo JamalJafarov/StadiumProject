@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StadiumCRUD));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -39,8 +42,10 @@
             this.lblCustomername = new System.Windows.Forms.Label();
             this.txtStadiumName = new System.Windows.Forms.TextBox();
             this.nmPrice = new System.Windows.Forms.NumericUpDown();
+            this.pbExit = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dtgStadium)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbExit)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -89,9 +94,40 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtgStadium.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtgStadium.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dtgStadium.BackgroundColor = System.Drawing.Color.IndianRed;
+            this.dtgStadium.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dtgStadium.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dtgStadium.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Coral;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgStadium.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dtgStadium.ColumnHeadersHeight = 46;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.IndianRed;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgStadium.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dtgStadium.EnableHeadersVisualStyles = false;
+            this.dtgStadium.GridColor = System.Drawing.Color.Red;
             this.dtgStadium.Location = new System.Drawing.Point(668, 189);
             this.dtgStadium.Name = "dtgStadium";
+            this.dtgStadium.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.IndianRed;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgStadium.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dtgStadium.RowHeadersWidth = 82;
             this.dtgStadium.RowTemplate.Height = 41;
             this.dtgStadium.Size = new System.Drawing.Size(1117, 628);
@@ -139,10 +175,23 @@
             // 
             // nmPrice
             // 
-            this.nmPrice.Location = new System.Drawing.Point(66, 375);
+            this.nmPrice.Location = new System.Drawing.Point(56, 375);
             this.nmPrice.Name = "nmPrice";
-            this.nmPrice.Size = new System.Drawing.Size(141, 39);
+            this.nmPrice.Size = new System.Drawing.Size(151, 39);
             this.nmPrice.TabIndex = 17;
+            // 
+            // pbExit
+            // 
+            this.pbExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbExit.Image = ((System.Drawing.Image)(resources.GetObject("pbExit.Image")));
+            this.pbExit.Location = new System.Drawing.Point(1719, 12);
+            this.pbExit.Name = "pbExit";
+            this.pbExit.Size = new System.Drawing.Size(48, 44);
+            this.pbExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbExit.TabIndex = 18;
+            this.pbExit.TabStop = false;
+            this.pbExit.Visible = false;
+            this.pbExit.Click += new System.EventHandler(this.pbExit_Click);
             // 
             // StadiumCRUD
             // 
@@ -150,6 +199,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1790, 1088);
+            this.Controls.Add(this.pbExit);
             this.Controls.Add(this.nmPrice);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnDelete);
@@ -166,6 +216,7 @@
             this.Load += new System.EventHandler(this.StadiumCRUD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtgStadium)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbExit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,5 +234,6 @@
         private Label lblCustomername;
         private TextBox txtStadiumName;
         private NumericUpDown nmPrice;
+        private PictureBox pbExit;
     }
 }

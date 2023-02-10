@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RoomPage));
             this.nmCapacity = new System.Windows.Forms.NumericUpDown();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -39,15 +42,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblCustomername = new System.Windows.Forms.Label();
             this.txtRoomName = new System.Windows.Forms.TextBox();
+            this.pbExit = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.nmCapacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgRoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbExit)).BeginInit();
             this.SuspendLayout();
             // 
             // nmCapacity
             // 
-            this.nmCapacity.Location = new System.Drawing.Point(32, 430);
+            this.nmCapacity.Location = new System.Drawing.Point(22, 430);
             this.nmCapacity.Name = "nmCapacity";
-            this.nmCapacity.Size = new System.Drawing.Size(141, 39);
+            this.nmCapacity.Size = new System.Drawing.Size(151, 39);
             this.nmCapacity.TabIndex = 27;
             // 
             // txtSearch
@@ -94,12 +99,43 @@
             // 
             this.dtgRoom.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtgRoom.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dtgRoom.BackgroundColor = System.Drawing.Color.Orange;
+            this.dtgRoom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dtgRoom.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
+            this.dtgRoom.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgRoom.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dtgRoom.ColumnHeadersHeight = 46;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgRoom.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dtgRoom.EnableHeadersVisualStyles = false;
+            this.dtgRoom.GridColor = System.Drawing.Color.Yellow;
             this.dtgRoom.Location = new System.Drawing.Point(644, 244);
             this.dtgRoom.Name = "dtgRoom";
+            this.dtgRoom.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.DarkOrange;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgRoom.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dtgRoom.RowHeadersWidth = 82;
             this.dtgRoom.RowTemplate.Height = 41;
-            this.dtgRoom.Size = new System.Drawing.Size(602, 520);
+            this.dtgRoom.Size = new System.Drawing.Size(925, 520);
             this.dtgRoom.TabIndex = 22;
             this.dtgRoom.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dtgRoom_RowHeaderMouseClick);
             // 
@@ -141,6 +177,19 @@
             this.txtRoomName.Size = new System.Drawing.Size(322, 54);
             this.txtRoomName.TabIndex = 18;
             // 
+            // pbExit
+            // 
+            this.pbExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbExit.Image = ((System.Drawing.Image)(resources.GetObject("pbExit.Image")));
+            this.pbExit.Location = new System.Drawing.Point(1638, 12);
+            this.pbExit.Name = "pbExit";
+            this.pbExit.Size = new System.Drawing.Size(48, 44);
+            this.pbExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbExit.TabIndex = 28;
+            this.pbExit.TabStop = false;
+            this.pbExit.Visible = false;
+            this.pbExit.Click += new System.EventHandler(this.pbExit_Click);
+            // 
             // RoomPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
@@ -148,6 +197,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1717, 1101);
+            this.Controls.Add(this.pbExit);
             this.Controls.Add(this.nmCapacity);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnDelete);
@@ -164,6 +214,7 @@
             this.Load += new System.EventHandler(this.RoomPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nmCapacity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgRoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbExit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,5 +232,6 @@
         private Label label3;
         private Label lblCustomername;
         private TextBox txtRoomName;
+        private PictureBox pbExit;
     }
 }
